@@ -3,10 +3,10 @@ services:
     container_name: mongodb
     image: mongo:4.4
     command: mongod --port 27017
-    expose:
-      - "27017"
+    ports:
+      - "27017:27017"
     volumes:
-      - ./dbdata:/data/db
+      - dbdata:/data/db
     networks:
       privnet:
         aliases:
@@ -15,11 +15,11 @@ services:
   free5gc-nrf:
     container_name: nrf
     image: free5gc/nrf:v4.1.0
-    command: ./nrf -c ./config/nrfcfg.yaml
-    expose:
-      - "8000"
+    command: ./nrf -c ./cellular_core_config/nrfcfg.yaml
+    ports:
+      - "8004:8004"
     volumes:
-      - ./config/nrfcfg.yaml:/free5gc/config/nrfcfg.yaml
+      - ./cellular_core_config/nrfcfg.yaml:/free5gc/cellular_core_config/nrfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       DB_URI: mongodb://db/free5gc
@@ -34,11 +34,13 @@ services:
   free5gc-amf:
     container_name: amf
     image: free5gc/amf:v4.1.0
-    command: ./amf -c ./config/amfcfg.yaml
+    command: ./amf -c ./cellular_core_config/amfcfg.yaml
     expose:
-      - "8000"
+      - "8100"
+    ports:
+      - "8100:8100"
     volumes:
-      - ./config/amfcfg.yaml:/free5gc/config/amfcfg.yaml
+      - ./cellular_core_config/amfcfg.yaml:/free5gc/cellular_core_config/amfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -53,11 +55,11 @@ services:
   free5gc-ausf:
     container_name: ausf
     image: free5gc/ausf:v4.1.0
-    command: ./ausf -c ./config/ausfcfg.yaml
-    expose:
-      - "8000"
+    command: ./ausf -c ./cellular_core_config/ausfcfg.yaml
+    ports:
+      - "8001:8001"
     volumes:
-      - ./config/ausfcfg.yaml:/free5gc/config/ausfcfg.yaml
+      - ./cellular_core_config/ausfcfg.yaml:/free5gc/cellular_core_config/ausfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -71,11 +73,11 @@ services:
   free5gc-nssf:
     container_name: nssf
     image: free5gc/nssf:v4.1.0
-    command: ./nssf -c ./config/nssfcfg.yaml
-    expose:
-      - "8000"
+    command: ./nssf -c ./cellular_core_config/nssfcfg.yaml
+    ports:
+      - "8005:8005"
     volumes:
-      - ./config/nssfcfg.yaml:/free5gc/config/nssfcfg.yaml
+      - ./cellular_core_config/nssfcfg.yaml:/free5gc/cellular_core_config/nssfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -89,11 +91,11 @@ services:
   free5gc-pcf:
     container_name: pcf
     image: free5gc/pcf:v4.1.0
-    command: ./pcf -c ./config/pcfcfg.yaml
-    expose:
-      - "8000"
+    command: ./pcf -c ./cellular_core_config/pcfcfg.yaml
+    ports:
+      - "8006:8006"
     volumes:
-      - ./config/pcfcfg.yaml:/free5gc/config/pcfcfg.yaml
+      - ./cellular_core_config/pcfcfg.yaml:/free5gc/cellular_core_config/pcfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -107,12 +109,12 @@ services:
   free5gc-smf:
     container_name: smf
     image: free5gc/smf:v4.1.0
-    command: ./smf -c ./config/smfcfg.yaml -u ./config/uerouting.yaml
-    expose:
-      - "8000"
+    command: ./smf -c ./cellular_core_config/smfcfg.yaml -u ./cellular_core_config/uerouting.yaml
+    ports:
+      - "8007:8007"
     volumes:
-      - ./config/smfcfg.yaml:/free5gc/config/smfcfg.yaml
-      - ./config/uerouting.yaml:/free5gc/config/uerouting.yaml
+      - ./cellular_core_config/smfcfg.yaml:/free5gc/cellular_core_config/smfcfg.yaml
+      - ./cellular_core_config/uerouting.yaml:/free5gc/cellular_core_config/uerouting.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -126,11 +128,11 @@ services:
   free5gc-udm:
     container_name: udm
     image: free5gc/udm:v4.1.0
-    command: ./udm -c ./config/udmcfg.yaml
-    expose:
-      - "8000"
+    command: ./udm -c ./cellular_core_config/udmcfg.yaml
+    ports:
+      - "8008:8008"
     volumes:
-      - ./config/udmcfg.yaml:/free5gc/config/udmcfg.yaml
+      - ./cellular_core_config/udmcfg.yaml:/free5gc/cellular_core_config/udmcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -145,11 +147,11 @@ services:
   free5gc-udr:
     container_name: udr
     image: free5gc/udr:v4.1.0
-    command: ./udr -c ./config/udrcfg.yaml
-    expose:
-      - "8000"
+    command: ./udr -c ./cellular_core_config/udrcfg.yaml
+    ports:
+      - "8009:8009"
     volumes:
-      - ./config/udrcfg.yaml:/free5gc/config/udrcfg.yaml
+      - ./cellular_core_config/udrcfg.yaml:/free5gc/cellular_core_config/udrcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       DB_URI: mongodb://db/free5gc
@@ -165,11 +167,11 @@ services:
   free5gc-chf:
     container_name: chf
     image: free5gc/chf:v4.1.0
-    command: ./chf -c ./config/chfcfg.yaml
-    expose:
-      - "8000"
+    command: ./chf -c ./cellular_core_config/chfcfg.yaml
+    ports:
+      - "8002:8002"
     volumes:
-      - ./config/chfcfg.yaml:/free5gc/config/chfcfg.yaml
+      - ./cellular_core_config/chfcfg.yaml:/free5gc/cellular_core_config/chfcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       DB_URI: mongodb://db/free5gc
@@ -186,11 +188,11 @@ services:
   free5gc-nef:
     container_name: nef
     image: free5gc/nef:v4.1.0
-    command: ./nef -c ./config/nefcfg.yaml
-    expose:
-      - "8000"
+    command: ./nef -c ./cellular_core_config/nefcfg.yaml
+    ports:
+      - "8003:8003"
     volumes:
-      - ./config/nefcfg.yaml:/free5gc/config/nefcfg.yaml
+      - ./cellular_core_config/nefcfg.yaml:/free5gc/cellular_core_config/nefcfg.yaml
       - ./cert:/free5gc/cert
     environment:
       GIN_MODE: release
@@ -205,21 +207,19 @@ services:
   free5gc-webui:
     container_name: webui
     image: free5gc/webui:v4.1.0
-    command: ./webui -c ./config/webuicfg.yaml
-    expose:
-      - "2121"
+    command: ./webui -c ./cellular_core_config/webuicfg.yaml
+    ports:
+      - "5000:5000"
+      - "2122:2122"
+      - "2121:2121"
     volumes:
-      - ./config/webuicfg.yaml:/free5gc/config/webuicfg.yaml
+      - ./cellular_core_config/webuicfg.yaml:/free5gc/cellular_core_config/webuicfg.yaml
     environment:
       - GIN_MODE=release
     networks:
       privnet:
         aliases:
           - webui
-    ports:
-      - "5000:5000"
-      - "2122:2122"
-      - "2121:2121"
     depends_on:
       - db
       - free5gc-nrf
@@ -233,3 +233,6 @@ networks:
         - subnet: 10.100.200.0/24
     driver_opts:
       com.docker.network.bridge.name: br-free5gc
+
+volumes:
+  dbdata:

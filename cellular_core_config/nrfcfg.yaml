@@ -9,7 +9,7 @@ configuration:
     scheme: http # the protocol for sbi (http or https)
     registerIPv4: nrf.free5gc.org # IP used to serve NFs or register to another NRF
     bindingIPv4: nrf.free5gc.org  # IP used to bind the service
-    port: 8000 # port used to bind the service
+    port: 8004 # port used to bind the service
     cert: # the local path of TLS key
       pem: cert/nrf.pem # NRF TLS Certificate
       key: cert/nrf.key # NRF TLS Private key

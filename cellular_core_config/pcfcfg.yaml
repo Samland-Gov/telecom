@@ -8,13 +8,13 @@ configuration:
     scheme: http # the protocol for sbi (http or https)
     registerIPv4: pcf.free5gc.org # IP used to register to NRF
     bindingIPv4: pcf.free5gc.org  # IP used to bind the service
-    port: 8000              # port used to bind the service
+    port: 8006              # port used to bind the service
     tls: # the local path of TLS key
       pem: cert/pcf.pem # PCF TLS Certificate
       key: cert/pcf.key # PCF TLS Private key
   timeFormat: 2019-01-02 15:04:05 # time format of this PCF
   defaultBdtRefId: BdtPolicyId-   # BDT Reference ID, indicating transfer policies of background data transfer.
-  nrfUri: http://nrf.free5gc.org:8000  # a valid URI of NRF
+  nrfUri: http://nrf.free5gc.org:8004  # a valid URI of NRF
   nrfCertPem: cert/nrf.pem
   serviceList:   # the SBI services provided by this PCF, refer to TS 29.507
     - serviceName: npcf-am-policy-control # Npcf_AMPolicyControl service

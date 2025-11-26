@@ -11,7 +11,7 @@ configuration:
     scheme: http # the protocol for sbi (http or https)
     registerIPv4: amf.free5gc.org # IP used to register to NRF
     bindingIPv4: amf.free5gc.org  # IP used to bind the service
-    port: 8000 # port used to bind the service
+    port: 8100 # port used to bind the service
     tls: # the local path of TLS key
       pem: cert/amf.pem # AMF TLS Certificate
       key: cert/amf.key # AMF TLS Private key
@@ -43,7 +43,7 @@ configuration:
           sd: 112233 # Slice Differentiator (3 bytes hex string, range: 000000~FFFFFF)
   supportDnnList:  # the DNN (Data Network Name) list supported by this AMF
     - internet
-  nrfUri: http://nrf.free5gc.org:8000 # a valid URI of NRF
+  nrfUri: http://nrf.free5gc.org:8004 # a valid URI of NRF
   nrfCertPem: cert/nrf.pem
   security:  # NAS security parameters
     integrityOrder: # the priority of integrity algorithms
